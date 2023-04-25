@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InternetShop.Domain.Entities;
 
 namespace InternetShop.Application.Interfaces
 {
-    internal class ICategoryRepository
+    public interface ICategoryRepository
     {
+        public void Add(Category category);
     }
 }

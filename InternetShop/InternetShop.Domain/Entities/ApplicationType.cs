@@ -2,12 +2,10 @@
 
 namespace InternetShop.Domain.Entities
 {
-    public class Category
+    public class ApplicationType
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        [Range(0, int.MaxValue)]
-        public int DisplayOrder { get; set; }
     }
 }

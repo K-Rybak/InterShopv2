@@ -2,10 +2,10 @@
 
 namespace InternetShop.Web.Models
 {
-    public class CategoryViewModel
+    public class ApplicationTypeVM
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Поле дожно быть заполнено!")]
+        [Required(ErrorMessage = "Укажите имя")]
         [Display(Name = "Название")]
         public string Name { get; set; } = string.Empty;
     }

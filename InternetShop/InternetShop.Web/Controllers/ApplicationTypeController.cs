@@ -5,20 +5,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InternetShop.Web.Controllers
 {
-    public class CategoryController : Controller
+    public class ApplicationTypeController : Controller
     {
-        private readonly ICategoryRepository _repository;
-        public CategoryController(ICategoryRepository repository)
+        private readonly IApplicationTypeRepository _repository;
+        public ApplicationTypeController(IApplicationTypeRepository repository)
         {
             _repository = repository;
         }
 
         public IActionResult Index()
         {
-            var categories = _repository.GetAll();
+            var applicationTypes = _repository.GetAll();
 
-            var model = categories
-                .Select(c => new CategoryViewModel
+            var model = applicationTypes
+                .Select(c => new ApplicationTypeVM
                 {
                     Id = c.Id,
                     Name = c.Name
@@ -35,16 +35,16 @@ namespace InternetShop.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CategoryViewModel model) 
+        public IActionResult Create(ApplicationTypeVM model)
         {
             if (!ModelState.IsValid)
                 return View();
 
-            var category = new Category
+            var applicationType = new ApplicationType
             {
                 Name = model.Name,
             };
-            _repository.Add(category);
+            _repository.Add(applicationType);
 
             return RedirectToAction("Index");
         }
@@ -52,40 +52,41 @@ namespace InternetShop.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var category = _repository.GetById(id);
+            var applicationType = _repository.GetById(id);
 
-            var model = new CategoryViewModel 
-            { 
-                Name = category.Name, 
+            var model = new ApplicationTypeVM
+            {
+                Name = applicationType.Name,
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(CategoryViewModel model)
+        public IActionResult Edit(ApplicationTypeVM model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            var category = new Category 
-            { 
-                Id = model.Id, 
-                Name = model.Name, 
+            var applicationType = new ApplicationType
+            {
+                Id = model.Id,
+                Name = model.Name,
             };
 
-            _repository.Update(category);
+            _repository.Update(applicationType);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var category = _repository.GetById(id);
+            var applicationType = _repository.GetById(id);
 
-            _repository.Remove(category);
+            _repository.Remove(applicationType);
 
             return RedirectToAction("Index");
         }
     }
 }
+
